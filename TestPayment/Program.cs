@@ -1,3 +1,4 @@
+using Stripe;
 
 namespace TestPayment
 {
@@ -11,8 +12,14 @@ namespace TestPayment
 
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+
+            builder.Services.ConfigureOptions<ApplicationOptionsSetup>();
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+
+            // Todo: change implementation to IOptions (use StripePaymentSettings).
+            StripeConfiguration.ApiKey = builder.Configuration["Stripe:SecretKey"];
+                
 
             var app = builder.Build();
 
@@ -26,7 +33,6 @@ namespace TestPayment
             app.UseHttpsRedirection();
 
             app.UseAuthorization();
-
 
             app.MapControllers();
 
