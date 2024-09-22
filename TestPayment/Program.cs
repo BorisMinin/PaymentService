@@ -1,4 +1,6 @@
 using Stripe;
+using StripePaymentService.Services;
+using StripePaymentService.Settings;
 
 namespace TestPayment
 {
@@ -18,8 +20,9 @@ namespace TestPayment
             builder.Services.AddSwaggerGen();
 
             // Todo: change implementation to IOptions (use StripePaymentSettings).
-            StripeConfiguration.ApiKey = builder.Configuration["Stripe:SecretKey"];
-                
+            builder.Services.Configure<StripePaymentSettings>(builder.Configuration.GetSection("Stripe"));
+            builder.Services.AddScoped<IStripeService, StripeService>();
+            builder.Services.AddScoped<StripeService>();
 
             var app = builder.Build();
 
@@ -35,6 +38,8 @@ namespace TestPayment
             app.UseAuthorization();
 
             app.MapControllers();
+
+            StripeConfiguration.ApiKey = builder.Configuration.GetSection("Stripe")["SecretKey"];
 
             app.Run();
         }
