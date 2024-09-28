@@ -1,6 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Stripe;
-using Stripe.Checkout;
 using StripePaymentService.Services;
 
 namespace TestPayment.Controllers
@@ -14,6 +12,6 @@ namespace TestPayment.Controllers
         public StripePaymentController(StripeService stripeService) => _stripeService = stripeService;
 
         [HttpPost("create-payment-url")]
-        public async Task<string> CreatePaymentUrl() => await _stripeService.CreateCheckoutSessionAsync();
+        public async Task<string> CreatePaymentUrl(CancellationToken token) =>  await _stripeService.CreateCheckoutSessionAsync(token);
     }
 }

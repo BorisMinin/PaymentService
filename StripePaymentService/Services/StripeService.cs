@@ -1,10 +1,11 @@
 ﻿using Stripe.Checkout;
+using StripePaymentService.Requests;
 
 namespace StripePaymentService.Services
 {
     public class StripeService : IStripeService
     {
-        public async Task<string> CreateCheckoutSessionAsync()
+        public async Task<string> CreateCheckoutSessionAsync(PaymentRequest request, CancellationToken token)
         {
             var stripeSession = new SessionService();
 
@@ -13,26 +14,26 @@ namespace StripePaymentService.Services
                 {
                     Mode = "payment",
                     ClientReferenceId = Guid.NewGuid().ToString(),
-                    SuccessUrl = "https://localhost:7074/swagger/index.html",
-                    CancelUrl = "https://localhost:7074/swagger/index.html",
-                    CustomerEmail = "boris.minin@outlook.com",
+                    SuccessUrl = request.SuccessUrl,// "https://localhost:7074/swagger/index.html",
+                    CancelUrl = request.CancelUrl, //"https://localhost:7074/swagger/index.html",
+                    CustomerEmail = request.CusttomerEmail,
                     LineItems = new()
                     {
                         new()
                         {
                             PriceData = new()
                             {
-                                Currency = "USD",
+                                Currency = request.Currency, //"USD",
                                 ProductData = new()
                                 {
-                                    Name = "TestProductName"
+                                    Name = request.OrderName,
                                 },
-                                UnitAmount = 100 * 100
+                                UnitAmount = request.UnitAmount
                             },
-                            Quantity = 1
+                            Quantity = request.Quantity
                         }
                     }
-                });
+                }, cancellationToken: token);
 
             return stripeCheckoutSession.Url;
         }
