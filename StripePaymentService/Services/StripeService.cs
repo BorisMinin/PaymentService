@@ -14,8 +14,8 @@ namespace StripePaymentService.Services
                 {
                     Mode = "payment",
                     ClientReferenceId = Guid.NewGuid().ToString(),
-                    SuccessUrl = request.SuccessUrl,// "https://localhost:7074/swagger/index.html",
-                    CancelUrl = request.CancelUrl, //"https://localhost:7074/swagger/index.html",
+                    SuccessUrl = request.SuccessUrl,
+                    CancelUrl = request.CancelUrl,
                     CustomerEmail = request.CusttomerEmail,
                     LineItems = new()
                     {
@@ -23,7 +23,7 @@ namespace StripePaymentService.Services
                         {
                             PriceData = new()
                             {
-                                Currency = request.Currency, //"USD",
+                                Currency = request.Currency,
                                 ProductData = new()
                                 {
                                     Name = request.OrderName,
@@ -35,7 +35,10 @@ namespace StripePaymentService.Services
                     }
                 }, cancellationToken: token);
 
-            return stripeCheckoutSession.Url;
+            return stripeCheckoutSession
+                //.PaymentStatus.ToString();
+                .Url
+                ;
         }
     }
 }
