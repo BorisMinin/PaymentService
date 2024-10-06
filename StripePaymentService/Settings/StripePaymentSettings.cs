@@ -6,9 +6,17 @@
     /// </summary>
     public class StripePaymentSettings
     {
-        // The secret key used to authenticate API requests to Stripe.
+        /// <summary>
+        /// The secret key used to authenticate API requests to Stripe.
+        /// </summary>
         public string SecretKey { get; set; }
-        // The publishable key used to identify your Stripe account in client-side requests.
+        /// <summary>
+        /// The publishable key used to identify your Stripe account in client-side requests.
+        /// </summary>
         public string PublishableKey { get; set; }
+        /// <summary>
+        /// The webhook signing key used to authenticate webhook requests from Stripe.
+        /// </summary>
+        public string WebhookSigningKey { get; set; }
     }
 }

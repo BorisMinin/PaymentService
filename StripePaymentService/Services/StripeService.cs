@@ -1,5 +1,6 @@
 ﻿using Stripe.Checkout;
 using StripePaymentService.Requests;
+using StripePaymentService.Services.Interfaces;
 
 namespace StripePaymentService.Services
 {

@@ -1,6 +1,6 @@
 ﻿using StripePaymentService.Requests;
 
-namespace StripePaymentService.Services
+namespace StripePaymentService.Services.Interfaces
 {
     public interface IStripeService
     {

@@ -1,5 +1,6 @@
 using Stripe;
 using StripePaymentService.Services;
+using StripePaymentService.Services.Interfaces;
 using StripePaymentService.Settings;
 
 namespace TestPayment
