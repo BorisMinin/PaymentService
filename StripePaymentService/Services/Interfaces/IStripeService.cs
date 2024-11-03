@@ -8,6 +8,6 @@ namespace StripePaymentService.Services.Interfaces
         /// Create checkout session for payment of the product.
         /// <paramref name="token">Cancellation token.</paramref>
         /// </summary>
-        public Task<string> CreateCheckoutSessionAsync(PaymentRequest request, CancellationToken token);
-    }
+        Task<string> CreateCheckoutSessionAsync(PaymentRequest request, CancellationToken token);
+    }            
 }

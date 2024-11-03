@@ -41,6 +41,7 @@ namespace TestPayment
             app.MapControllers();
 
             StripeConfiguration.ApiKey = builder.Configuration.GetSection("Stripe")["SecretKey"];
+            StripeConfiguration.ClientId = builder.Configuration.GetSection("Stripe")["ClientId"];
 
             app.Run();
         }

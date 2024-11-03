@@ -36,10 +36,7 @@ namespace StripePaymentService.Services
                     }
                 }, cancellationToken: token);
 
-            return stripeCheckoutSession
-                //.PaymentStatus.ToString();
-                .Url
-                ;
+            return stripeCheckoutSession.Url;
         }
     }
 }
